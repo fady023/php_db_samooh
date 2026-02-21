@@ -35,16 +35,18 @@ if (isset(($_GET["std_id"]))) {
 
         <select name="courses">
             <?php
-         
+
             $sql_course = "select * from courses";
-           
+
 
             $run_course = mysqli_query($con, $sql_course);
 
 
             foreach ($run_course as $co):
                 ?>
-                <option value="<?php echo  $co['id']; ?>" <?php  if($update && $co['id']==$data['course_id']){echo "selected";}  ?>><?php echo $co['c_name']; ?></option>
+                <option value="<?php echo $co['id']; ?>" <?php if ($update && $co['id'] == $data['course_id']) {
+                       echo "selected";
+                   } ?>><?php echo $co['c_name']; ?></option>
             <?php endforeach; ?>
         </select>
 
@@ -69,19 +71,36 @@ if (isset($_POST['sub'])) {
 
     $course_id = $_POST['courses'];
 
-    if ($update) {
+    $check_mail = "select * from students where email='$email'";
 
-        $sql = "update students set name='$name' , email='$email' , course_id='$course_id' where id='$id' ";
+    if($update){
+        $check_mail .= "and id !='$id'";
+    }
 
+    $run_check = mysqli_query($con, $check_mail);
+
+    if (mysqli_num_rows($run_check) > 0) {
+        echo "<br> sorry this mail already taken";
     } else {
-        $sql = "insert into students(name,email,course_id) values('$name','$email','$course_id')";
+
+        if ($update) {
+
+            $sql = "update students set name='$name' , email='$email' , course_id='$course_id' where id='$id' ";
+
+        } else {
+            $sql = "insert into students(name,email,course_id) values('$name','$email','$course_id')";
+
+        }
+
+        $run = mysqli_query($con, $sql);
+
+        if ($run) {
+            echo "<br> values inserted into students";
+            header("refresh:3,url=index.php");
+        }
+
 
     }
 
-    $run = mysqli_query($con, $sql);
 
-    if ($run) {
-        echo "<br> values inserted into students";
-        header("refresh:3,url=index.php");
-    }
 }
