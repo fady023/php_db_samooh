@@ -45,6 +45,13 @@ if (isset(($_POST['reg_btn']))) {
         array_push($errors,"password is required");
     }
 
+    $check_mail = "select * from admin where email='$email'";
+
+    $run_check = mysqli_query($con, $check_mail);
+
+    if (mysqli_num_rows($run_check) > 0) {
+        array_push($errors, "email is already exist");
+    }
 }
 
 
