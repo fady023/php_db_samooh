@@ -1,5 +1,8 @@
 <?php
+
 include "conn.php";
+
+$errors = array();
 
 $update = false;
 
@@ -65,7 +68,15 @@ if (isset(($_GET["std_id"]))) {
 if (isset($_POST['sub'])) {
 
     $name = $_POST['username'];
+
+    if (empty($name)) {
+        array_push($errors, "name is required");
+    }
+
     $email = $_POST['mail'];
+    if (empty($email)) {
+        array_push($errors, "email is required");
+    }
 
     $id = $update ? $_GET["std_id"] : null;
 
@@ -73,15 +84,17 @@ if (isset($_POST['sub'])) {
 
     $check_mail = "select * from students where email='$email'";
 
-    if($update){
+    if ($update) {
         $check_mail .= "and id !='$id'";
     }
 
     $run_check = mysqli_query($con, $check_mail);
 
     if (mysqli_num_rows($run_check) > 0) {
-        echo "<br> sorry this mail already taken";
-    } else {
+        array_push($errors, "email is already exist");
+    }
+
+    if (empty($errors)) {
 
         if ($update) {
 
@@ -98,9 +111,16 @@ if (isset($_POST['sub'])) {
             echo "<br> values inserted into students";
             header("refresh:3,url=index.php");
         }
-
-
+    } else {
+        foreach ($errors as $err) {
+            echo " <br> $err ";
+        }
     }
+
+
+
+
+
 
 
 }
