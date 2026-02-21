@@ -13,4 +13,6 @@ if(!$con){
     echo "connection successful";
 }
 
+$errors = array();
+
 

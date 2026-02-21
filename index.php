@@ -56,8 +56,8 @@ if($run) {echo "<br> values inserted into students";} */
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
 <br>
+<br></br>
 <a href="add_student.php">Add Student</a>
     <?php
 

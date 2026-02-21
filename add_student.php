@@ -2,7 +2,7 @@
 
 include "conn.php";
 
-$errors = array();
+
 
 $update = false;
 
@@ -20,7 +20,7 @@ if (isset(($_GET["std_id"]))) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<br lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -28,7 +28,10 @@ if (isset(($_GET["std_id"]))) {
     <title>Add Student</title>
 </head>
 
-<body>
+<br>
+
+    
+    <a href="index.php">Back to Students List</a></br></br>
 
     <form action="" method="post">
         <input type="text" name="username" placeholder="name" value="<?php if ($update)
@@ -56,7 +59,7 @@ if (isset(($_GET["std_id"]))) {
         <button type="submit" name="sub">
             <?php echo $update ? "UPDATE" : "ADD"; ?>
         </button>
-    </form>
+    </form> </br>
 
 </body>
 
