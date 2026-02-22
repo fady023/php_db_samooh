@@ -43,6 +43,8 @@ if (isset(($_POST['reg_btn']))) {
     $pass=$_POST['pass'];
     if(empty($pass)){
         array_push($errors,"password is required");
+    }else{
+        $hashed_pass = password_hash($pass,  PASSWORD_BCRYPT);
     }
 
     $check_mail = "select * from admin where email='$email'";
@@ -53,7 +55,7 @@ if (isset(($_POST['reg_btn']))) {
         array_push($errors, "email is already exist");
     }
     if(empty($errors)){
-        $sql = "insert into admin(name,email,password values('$name','$email','$pass'))";
+        $sql = "insert into admin(name,email,password values('$name','$email','$hashed_pass')";
         $run = mysqli_query($con,$sql);
         if($run){
             echo "<br> admin registered successfully";
