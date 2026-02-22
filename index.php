@@ -65,7 +65,7 @@ if($run) {echo "<br> values inserted into students";} */
 </head>
 
 <body>
-    <?php     echo "<h2> welcome ".$_SESSION['admin_name']."</h2>"; ?>
+  <?php  include "header.php"; ?>
     <br><br></br>
     <a href="add_student.php">Add Student</a>
     <?php

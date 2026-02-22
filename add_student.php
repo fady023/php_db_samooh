@@ -29,6 +29,7 @@ if (isset(($_GET["std_id"]))) {
 
 <br>
 <body>
+     <?php  include "header.php"; ?>
     <a href="index.php">Back to Students List</a></br></br>
 
     <form action="" method="post">
