@@ -13,7 +13,11 @@ include "./conn.php";
 </head>
 
 <body>
-    <br><br>
+    <br>
+
+    <h2>Register</h2>
+    
+    <br>
     <form action="" method="post">
         <input type="text" name="username" placeholder="username">
         <input type="email" name="mail" placeholder="email">
@@ -55,9 +59,10 @@ if (isset(($_POST['reg_btn']))) {
         array_push($errors, "email is already exist");
     }
     if(empty($errors)){
-        $sql = "insert into admin(name,email,password values('$name','$email','$hashed_pass')";
+        $sql = "insert into admin(name,email,pass) values('$name','$email','$hashed_pass')";
         $run = mysqli_query($con,$sql);
         if($run){
+            $_SESSION['admin_name'] = $name;
             echo "<br> admin registered successfully";
             header("refresh:5,url=index.php");
         }else{

@@ -1,16 +1,23 @@
 <?php
 
 include "conn.php";
+if(isset($_SESSION['admin_name'])){
 
-if(isset(($_GET["std_id"]))){
-    $id=$_GET["std_id"];
+if (isset(($_GET["std_id"]))) {
+    $id = $_GET["std_id"];
     $sql = "delete from students where id ='$id'";
-    $run = mysqli_query($con,$sql);
-    if($run){
+    $run = mysqli_query($con, $sql);
+    if ($run) {
         echo "<br> student deleted";
-    }else{
-        echo "<br> student not deleted ". mysqli_error($con);
+    } else {
+        echo "<br> student not deleted " . mysqli_error($con);
     }
+}
+
+if(isset($_GET['logout'])){
+    session_destroy();
+    header("location:register.php");
+
 }
 
 ///// 1- create table 
@@ -42,7 +49,6 @@ $run = mysqli_query($con,$sql);
 
 if($run) {echo "<br> values inserted into students";} */
 
-
 ///////////////////////////////////////////////////////
 
 // 3 - select in html (show data) students
@@ -56,28 +62,38 @@ if($run) {echo "<br> values inserted into students";} */
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<br>
-<br></br>
-<a href="add_student.php">Add Student</a>
+<body>
+    <?php     echo "<h2> welcome ".$_SESSION['admin_name']."</h2>"; ?>
+    <br><br></br>
+    <a href="add_student.php">Add Student</a>
     <?php
 
     $sql = "select *, students.id as st_id , courses.id as c_id from students join courses on students.course_id=courses.id order by st_id DESC";
     $run = mysqli_query($con, $sql);
 
-     foreach ($run as $row) {
-        
+    foreach ($run as $row) {
+
         ?>
         <ul>
-            <li> Id : <?php  echo $row['st_id']  ?></li>
-            <li> Student_Name : <?php  echo $row['name']  ?></li>
-            <li> Student_Email :<?php  echo $row['email']  ?></li>
-            <li> Course_Name : <?php  echo $row['c_name']  ?></li>
-            <li><a href="./add_student.php?std_id=<?php echo $row['st_id'];  ?>">update</a></li>
-            <li><a href="./index.php?std_id=<?php echo $row['st_id'];?>">delete</a></li>
+            <li> Id : <?php echo $row['st_id'] ?></li>
+            <li> Student_Name : <?php echo $row['name'] ?></li>
+            <li> Student_Email :<?php echo $row['email'] ?></li>
+            <li> Course_Name : <?php echo $row['c_name'] ?></li>
+            <li><a href="./add_student.php?std_id=<?php echo $row['st_id']; ?>">update</a></li>
+            <li><a href="./index.php?std_id=<?php echo $row['st_id']; ?>">delete</a></li>
         </ul>
         <?php
-    } 
+    }
     ?>
+
+    <a href="./index.php?logout=true">Log Out</a>
 </body>
 
 </html>
+
+<?php 
+
+}else{
+    header("location:register.php");
+}
+

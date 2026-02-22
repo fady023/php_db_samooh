@@ -15,4 +15,4 @@ if(!$con){
 
 $errors = array();
 
-
+session_start();

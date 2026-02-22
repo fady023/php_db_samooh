@@ -2,7 +2,7 @@
 
 include "conn.php";
 
-
+if(isset($_SESSION['admin_name'])){
 
 $update = false;
 
@@ -17,7 +17,6 @@ if (isset(($_GET["std_id"]))) {
 
 }
 
-
 ?>
 <!DOCTYPE html>
 <br lang="en">
@@ -29,8 +28,7 @@ if (isset(($_GET["std_id"]))) {
 </head>
 
 <br>
-
-    
+<body>
     <a href="index.php">Back to Students List</a></br></br>
 
     <form action="" method="post">
@@ -65,8 +63,6 @@ if (isset(($_GET["std_id"]))) {
 
 </html>
 <?php
-
-
 
 if (isset($_POST['sub'])) {
 
@@ -120,10 +116,9 @@ if (isset($_POST['sub'])) {
         }
     }
 
+}
 
 
-
-
-
-
+}else{
+    header("location:register.php");
 }
