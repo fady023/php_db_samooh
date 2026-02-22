@@ -38,12 +38,12 @@ if(isset($_POST['log_btn'])){
     $run_check = mysqli_query($con, $check_mail);
 
     if ( mysqli_num_rows($run_check) !=1 ) {
-        array_push($errors, "email is already exist");
+        array_push($errors, "email is incorrect");
     }
 
     $admin_data = mysqli_fetch_assoc($run_check);
     if(!password_verify($pass,$admin_data['pass'])){
-        array_push($errors,"password is wrong");
+        array_push($errors,"password is incorrect");
     }
     if(empty($errors)){
         $_SESSION['admin_name'] =$admin_data['name'];

@@ -31,7 +31,9 @@ if (mysqli_num_rows(($check)) == 0) {
 
 id integer primary key auto_increment,
 name varchar(50) not null,
-email varchar(50) unique
+email varchar(50) unique,
+course_id integer,
+foreign ke(course_id) references courses(id)
 )";
 
     $run = mysqli_query($con, $sql);
