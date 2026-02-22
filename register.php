@@ -52,6 +52,21 @@ if (isset(($_POST['reg_btn']))) {
     if (mysqli_num_rows($run_check) > 0) {
         array_push($errors, "email is already exist");
     }
+    if(empty($errors)){
+        $sql = "insert into admin(name,email,password values('$name','$email','$pass'))";
+        $run = mysqli_query($con,$sql);
+        if($run){
+            echo "<br> admin registered successfully";
+            header("refresh:5,url=index.php");
+        }else{
+            echo "<br> Error ".mysqli_error($con);
+        }
+
+    }else{
+        foreach($errors as $err) :
+            echo "<br> <h3> $err </h3>";
+        endforeach;
+    }
 }
 
 
