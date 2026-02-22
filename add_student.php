@@ -58,7 +58,7 @@ if (isset(($_GET["std_id"]))) {
             <?php echo $update ? "UPDATE" : "ADD"; ?>
         </button>
     </form> </br>
-
+<?php  include "footer.php";  ?>
 </body>
 
 </html>

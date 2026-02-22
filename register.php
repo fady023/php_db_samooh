@@ -25,6 +25,7 @@ include "./conn.php";
         <button type="submit" name="reg_btn">Register</button>
     </form>
 
+    <a href="login.php"> Already Have an account</a>
 </body>
 
 </html>
