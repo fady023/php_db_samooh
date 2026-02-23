@@ -10,7 +10,7 @@ $con= mysqli_connect($server_nm,$username,$pass,$db_nm);
 if(!$con){
     die("connection failed".mysqli_connect_error());
 }else{
-    echo "connection successful";
+    // echo "connection successful";
 }
 
 $errors = array();

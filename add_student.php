@@ -25,6 +25,7 @@ if (isset(($_GET["std_id"]))) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Student</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <br>
@@ -32,11 +33,13 @@ if (isset(($_GET["std_id"]))) {
      <?php  include "header.php"; ?>
     <a href="index.php">Back to Students List</a></br></br>
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <input type="text" name="username" placeholder="name" value="<?php if ($update)
             echo $data['name']; ?>">
         <input type="email" name="mail" placeholder="email" value="<?php if ($update)
             echo $data['email']; ?>">
+
+        <input type="file" name="filetoupload" accept="image/*">
 
         <select name="courses">
             <?php
@@ -66,6 +69,14 @@ if (isset(($_GET["std_id"]))) {
 <?php
 
 if (isset($_POST['sub'])) {
+
+$target_dir = "uploads/";
+$target_file = $target_dir.basename($_FILES["filetoupload"]["name"]);
+
+ if(!move_uploaded_file($_FILES["filetoupload"]["tmp_name"],$target_file)){
+   array_push($errors, "file not uploaded");
+
+ }
 
     $name = $_POST['username'];
 
@@ -98,10 +109,10 @@ if (isset($_POST['sub'])) {
 
         if ($update) {
 
-            $sql = "update students set name='$name' , email='$email' , course_id='$course_id' where id='$id' ";
+            $sql = "update students set name='$name' , email='$email' , course_id='$course_id',image='$target_file' where id='$id' ";
 
         } else {
-            $sql = "insert into students(name,email,course_id) values('$name','$email','$course_id')";
+            $sql = "insert into students(name,email,course_id,image) values('$name','$email','$course_id','$target_file')";
 
         }
 

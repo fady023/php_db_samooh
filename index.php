@@ -83,6 +83,7 @@ if($run) {echo "<br> values inserted into students";} */
             <li> Student_Name : <?php echo $row['name'] ?></li>
             <li> Student_Email :<?php echo $row['email'] ?></li>
             <li> Course_Name : <?php echo $row['c_name'] ?></li>
+            <li><img src="<?php echo $row['image']; ?>" width="100"></li>
             <li><a href="./add_student.php?std_id=<?php echo $row['st_id']; ?>">update</a></li>
             <li><a href="./index.php?std_id=<?php echo $row['st_id']; ?>">delete</a></li>
         </ul>
