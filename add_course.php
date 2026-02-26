@@ -45,7 +45,7 @@ if (isset(($_POST["add_btn"]))) {
         array_push($errors, "Description required");
     }
 
-    $insert_course = mysqli_query($con, "insert into courses(c_name,dscription) values('$c_name','$c_desc')");
+    $insert_course = mysqli_query($con, "insert into courses(c_name,description) values('$c_name','$c_desc')");
     // $last_inserted_id = mysqli_insert_id($con);
 
     $last_id_sql =mysqli_fetch_assoc(mysqli_query($con,"select LAST_INSERT_ID() as id "));

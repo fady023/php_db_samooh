@@ -72,8 +72,9 @@ if (isset($_SESSION['admin_name'])) {
     <body>
         <?php include "header.php"; ?>
         <br><br></br>
-        <a href="add_student.php">Add Student </a>
-        <a href="index.php"> Show All</a>
+        <a href="./add_student.php">Add Student </a>
+        <a href="./index.php"> Show All students</a>
+        <a href="./courses.php"> Show All courses</a>
         <?php
 
 
