@@ -1,0 +1,17 @@
+# Uploads and media
+uploads/
+.DS_Store
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.log
