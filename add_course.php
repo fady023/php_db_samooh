@@ -60,7 +60,11 @@ if (isset(($_POST["add_btn"]))) {
         $file_name = $val;
         $target_file = $target_dir . $file_name;
         move_uploaded_file($_FILES["imgs"]["tmp_name"][$key], $target_file);
-       mysqli_query($con, "insert into courses_images(image,course_id) values('$target_file','$last_inserted_id')");
+      $insert_img = "insert into courses_images(image,course_id) values('$target_file','$last_inserted_id'";
+
+      if(mysqli_query($con,$insert_img)){
+          echo "course added successfully";
+          header("refresh:3,url=index.php");
     }
 }
 
